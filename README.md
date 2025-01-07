@@ -2101,15 +2101,19 @@ Evaluasi model adalah proses untuk mengukur performa model prediktif dengan meng
 ---
 
 ### **Mean Squared Error (MSE)**
-MSE dihitung sebagai rata-rata kuadrat selisih antara nilai sebenarnya $$ y_i $$ dan nilai prediksi $$ \hat{y}_i $$. Rumusnya adalah:
-$$
-\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
-$$
-Keterangan:
--  n : Jumlah data
-- y_i : Nilai aktual pada data ke-\( i \)
-- hat{y}_i : Nilai prediksi pada data ke-\( i \)
+MSE dihitung sebagai rata-rata kuadrat selisih antara nilai sebenarnya $$ \text{y_i} $$ dan nilai prediksi $$ \hat{y}_i} $$. Rumusnya adalah:
 
+$$
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
+$$
+\begin{aligned}
+y_i & : \text{Nilai aktual (observasi sebenarnya)} \\
+\hat{y}_i & : \text{Nilai prediksi model} \\
+n & : \text{Jumlah data (observasi)}
+\end{aligned}
+$$
 Nilai MSE yang lebih kecil menunjukkan model memiliki kemampuan prediksi yang lebih baik, karena kesalahan prediksi lebih kecil.
 
 ---  
