@@ -11,9 +11,8 @@ Data science memainkan peran penting dalam memahami dan menganalisis pola emisi 
 
 ## Problem Statement
 
-Peningkatan emisi karbon dioksida (CO2) dari kendaraan bermotor menjadi salah satu penyumbang utama perubahan iklim global. Di Indonesia, sektor transportasi menyumbang hingga 85% dari total pencemaran udara, dengan kendaraan pribadi dan sepeda motor sebagai kontributor terbesar. Emisi ini terutama dipengaruhi oleh berbagai karakteristik kendaraan, termasuk ukuran mesin, jenis bahan bakar, dan efisiensi bahan bakar. Namun, tantangan muncul dari banyaknya faktor yang memengaruhi emisi, sehingga sulit untuk memahami pola emisi tanpa analisis yang mendalam.
-
-Predictive analytics memberikan peluang untuk memanfaatkan data kendaraan dan mengembangkan model prediktif guna memahami dan memitigasi emisi CO2. Dengan memanfaatkan data seperti konsumsi bahan bakar, jenis transmisi, dan kapasitas mesin, model dapat membantu memprediksi emisi CO2 dengan akurasi tinggi.
+1. Bagaimana cara memprediksi emisi CO2 kendaraan berdasarkan karakteristik seperti ukuran mesin, jenis bahan bakar, dan konsumsi bahan bakar?
+2. Bagaimana hubungan variabel seperti tipe atau ukuran mesin, jenis bahan bakar, dan efisiensi bahan bakar terhadap tingkat emisi CO2 kendaraan?
 
 ## Goals
 
@@ -45,27 +44,6 @@ Tautannya dapat diakses di sini:
 [Vehicle CO2 Emissions Dataset](https://www.kaggle.com/datasets/brsahan/vehicle-co2-emissions-dataset)
 
 ## Data Loading
-
-Sebelum melakukan eksplorasi data, terlebih dahulu kita load data, seperti berikut:
-
-    daftar file dalam path:
-    co2.csv
-
-
-
-```python
-# Load dataset
-df = pd.read_csv(f"{path}/{file}", low_memory=False)
-print(df.shape)
-
-pd.set_option('display.max_columns', None)
-df.head()
-```
-
-    (7385, 12)
-
-
-
 
 
 <table border="1" class="dataframe">
@@ -200,10 +178,6 @@ Berikut detail dari tiap-tiap variabel yang ada untuk memahami data yang kita pr
 
 
 
-```python
-df.info()
-```
-
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 7385 entries, 0 to 7384
     Data columns (total 12 columns):
@@ -225,15 +199,11 @@ df.info()
     memory usage: 692.5+ KB
 
 
-dari deskripsi variabel dan informasi di atas, dapat diperoleh bahwa tidak ada missing value dan tidak terdapat masalah pada tipe data dalam dataset. Selanjutnya untuk lebih detailnya periksa total missing value dan jika terdapat duplikasi data.
+dari hasil di atas tidak terdapat masalah pada tipe data dalam dataset. variabel dengan tipe data float sebanyak 4, variabel yang bertipe integer sebanyak 3 dan dengna tipe data object sebanyak 5 variabel.
 
 ### EDA - Cleaning Data
 
 #### Menangani Missing Value & Duplicate Data
-
-
-
-
 
 <table border="1" class="dataframe">
   <thead>
@@ -299,21 +269,14 @@ dari deskripsi variabel dan informasi di atas, dapat diperoleh bahwa tidak ada m
     Jumlah duplikat: 1103
 
 
-
+Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama sekali, akan tetapi memiliki duplicate value yang lumayan banyak yaitu sebanyak ```1103``` data yang terduplikasi, sehingga harus dihilangkan.
 
     Jumlah duplikat setelah pembersihan: 0
 
 
-Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama sekali, akan tetapi memiliki duplicate value yang lumayan banyak yaitu sebanyak ```1103``` data yang terduplikasi, sehingga harus dihilangkan.
+
 
 #### Menangani Outliers
-
-
-```python
-df.describe()
-```
-
-
 
 
 <table border="1" class="dataframe">
@@ -458,11 +421,6 @@ dari ringkasan statistik yang diperoleh:
 - Kendaraan dengan emisi CO2 terendah menghasilkan **96 g/km**, sedangkan kendaraan dengan emisi tertinggi menghasilkan **522 g/km**.
 - Sebagian besar kendaraan memiliki emisi antara **208 g/km** (Q1) dan **289 g/km** (Q3).
 
----
-
-##### **Catatan Tambahan:**
-- **Outlier**: Nilai yang jauh di luar rentang normal, seperti konsumsi bahan bakar kombinasi yang mencapai **26.10 L/100 km** atau emisi CO2 sebesar **522 g/km**, dan variabel mungkin memerlukan perhatian lebih karena berpotensi menjadi *outlier*.
-- **Variabilitas**: Fitur seperti konsumsi bahan bakar dan emisi CO2 menunjukkan tingkat variabilitas yang cukup tinggi, seperti yang ditunjukkan oleh standar deviasi yang besar.
 
 
 
@@ -471,140 +429,7 @@ dari ringkasan statistik yang diperoleh:
 ![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_38_0.png)
     
 
-
-##### **Menangani Outlier Menggunakan Metode IQR**
-
-Outlier adalah nilai yang berada jauh di luar rentang normal data. Salah satu cara yang efektif untuk mengidentifikasi dan menangani outlier adalah menggunakan **Metode IQR (Interquartile Range)**. Berikut adalah langkah-langkah dan cara melakukannya:
-
-1. **Definisi IQR**
-Interquartile Range (IQR) adalah rentang antara kuartil ketiga (Q3) dan kuartil pertama (Q1), yang merepresentasikan 50% data tengah.
-
-2. **Identifikasi Outlier**
-Outlier didefinisikan sebagai nilai yang berada di bawah atau di atas batas berikut:
-- **Batas Bawah (Lower Bound)**
-- **Batas Atas (Upper Bound)**
-
-Nilai yang:
-- Kurang dari **Lower Bound** dianggap sebagai *outlier bawah*.
-- Lebih dari **Upper Bound** dianggap sebagai *outlier atas*.
-
-3. **Langkah-langkah Penanganan**  
-
-
-
-
-```python
-df.shape
-```
-
-
-
-
-    (5816, 12)
-
-
-
-
-
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Engine Size(L)</th>
-      <th>Cylinders</th>
-      <th>Fuel Consumption City (L/100 km)</th>
-      <th>Fuel Consumption Hwy (L/100 km)</th>
-      <th>Fuel Consumption Comb (L/100 km)</th>
-      <th>Fuel Consumption Comb (mpg)</th>
-      <th>CO2 Emissions(g/km)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-      <td>5816.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>3.014254</td>
-      <td>5.391678</td>
-      <td>12.233253</td>
-      <td>8.831327</td>
-      <td>10.702975</td>
-      <td>27.664718</td>
-      <td>246.004814</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.215559</td>
-      <td>1.517327</td>
-      <td>2.858852</td>
-      <td>1.864839</td>
-      <td>2.379066</td>
-      <td>6.043525</td>
-      <td>50.208692</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.900000</td>
-      <td>3.000000</td>
-      <td>5.600000</td>
-      <td>4.500000</td>
-      <td>6.000000</td>
-      <td>16.000000</td>
-      <td>128.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>2.000000</td>
-      <td>4.000000</td>
-      <td>10.000000</td>
-      <td>7.400000</td>
-      <td>8.900000</td>
-      <td>23.000000</td>
-      <td>207.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>3.000000</td>
-      <td>6.000000</td>
-      <td>11.900000</td>
-      <td>8.600000</td>
-      <td>10.400000</td>
-      <td>27.000000</td>
-      <td>242.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>3.600000</td>
-      <td>6.000000</td>
-      <td>14.100000</td>
-      <td>9.900000</td>
-      <td>12.300000</td>
-      <td>32.000000</td>
-      <td>281.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>6.200000</td>
-      <td>8.000000</td>
-      <td>21.300000</td>
-      <td>14.500000</td>
-      <td>18.100000</td>
-      <td>47.000000</td>
-      <td>407.000000</td>
-    </tr>
-  </tbody>
-</table>
-
+Outlier adalah nilai yang berada jauh di luar rentang normal data. Namun pada data kita, sebaran data masih jauh dibawah nilai rata-rata, artinya data yang yang kita miliki masih terbilang wajar, ambil contoh, variabel ```Engine Size``` bisa saja engine size memiliki value 8, tidak termasuk anomali.
 
 
 ### EDA - Univariate Analysis
