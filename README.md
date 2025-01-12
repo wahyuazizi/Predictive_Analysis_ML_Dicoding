@@ -1,6 +1,8 @@
 # Laporan Proyek Machine Learning - Wahyu Azizi
+___
 
-## Domain Proyek
+# Domain Proyek
+___
 
 Peningkatan emisi karbon dioksida (CO2) dari kendaraan bermotor menjadi salah satu penyumbang utama perubahan iklim global. Hal ini disebabkan oleh pertumbuhan jumlah kendaraan yang pesat, terutama di negara-negara berkembang seperti Indonesia. Kendaraan bermotor, terutama yang menggunakan bahan bakar fosil, menghasilkan emisi CO2 melalui proses pembakaran. Penelitian menunjukkan bahwa sektor transportasi berkontribusi signifikan terhadap total emisi gas rumah kaca. Di Indonesia, emisi dari transportasi diperkirakan mencapai 85% dari total pencemaran udara, dengan kendaraan pribadi dan sepeda motor sebagai penyumbang terbesar [[1](https://www.semanticscholar.org/paper/Kajian-Emisi-CO2-Dari-Kendaraan-Bermotor-Di-Kampus-Anggraeni/214a377555002c31829c59dbf1dea7cfb396ef8d)].  
 Sebuah studi di Jalan Raya Kemantren, Sidoarjo, menunjukkan bahwa potensi emisi CO2 dari sepeda motor mencapai 67.568,26 g dalam 30 menit per kilometer, sedangkan mobil menghasilkan sekitar 63.335,30 g pada periode yang sama[[2](https://www.semanticscholar.org/paper/Analisis-Potensi-Emisi-CO2-Oleh-Berbagai-Jenis-di-Sudarti-Yushardi/81d79cda27154bdf4c54548423a878659b872df5)]. Selain itu, kawasan industri seperti SIER di Surabaya juga mengalami peningkatan emisi CO2 akibat tingginya kepadatan kendaraan dan kemacetan[[3](https://www.semanticscholar.org/paper/Analisis-Besaran-Emisi-Gas-CO2-Kendaraan-Bermotor-Kusumawardani-Navastara/54310e88f91c19e3519403d20b70adf299d55a3b)][[4](https://www.semanticscholar.org/paper/Arahan-Penyediaan-Ruang-Terbuka-Hijau-Dalam-Emisi-Kusumawardani/52438bef01b4397f8f43cc90d4a3a8dafc5edea6)]. Peningkatan emisi CO2 berkontribusi pada efek rumah kaca, yang berujung pada pemanasan global. Kenaikan suhu akibat peningkatan konsentrasi gas rumah kaca dapat menyebabkan perubahan iklim yang ekstrem, termasuk cuaca yang tidak menentu dan bencana alam[[5](https://www.semanticscholar.org/paper/ANALISIS-SHIFTING-PENGGUNAAN-MODA-KENDARAAN-KE-API-Amelia-Samadikun/9b4974abd17e7a013948ebb8f2ca4cf11b924e60)]. Penelitian juga menunjukkan bahwa daerah dengan kepadatan transportasi tinggi mengalami penurunan kualitas udara dan peningkatan suhu[[3](https://www.semanticscholar.org/paper/Analisis-Besaran-Emisi-Gas-CO2-Kendaraan-Bermotor-Kusumawardani-Navastara/54310e88f91c19e3519403d20b70adf299d55a3b)].  
@@ -8,6 +10,7 @@ Kualitas udara yang buruk diakibatkan oleh peningkatan jumlah kendaraan bermotor
 Data science memainkan peran penting dalam memahami dan menganalisis pola emisi dari kendaraan bermotor. Dengan memanfaatkan teknik analisis data, machine learning, dan pemodelan statistik, para peneliti dan pembuat kebijakan dapat memperoleh wawasan yang lebih baik mengenai sumber emisi, tren, dan dampaknya terhadap lingkungan.
 
 # Business Understanding
+___
 
 ## Problem Statement
 
@@ -36,7 +39,9 @@ Untuk membangun model prediksi emisi CO2, digunakan tiga algoritma:
 - ```Boosting```:  
     Digunakan untuk meningkatkan akurasi dengan mengatasi kesalahan prediksi pada model sebelumnya. Mampu menangani interaksi kompleks antara fitur, cocok untuk dataset ini yang melibatkan banyak variabel interdependen.
 
+
 # Data Understanding
+___
 
 Dataset ini berisi informasi tentang spesifikasi kendaraan, konsumsi bahan bakar, dan emisi CO2 yang dikumpulkan untuk menganalisis dampak lingkungan dari kendaraan serta memprediksi emisi CO2 menggunakan model regresi. Dataset ini dirancang untuk mendukung pendekatan **Simple Linear Regression (SLR)** dan **Multiple Linear Regression (MLR)** dalam proyek machine learning.
 
@@ -45,7 +50,27 @@ Tautannya dapat diakses di sini:
 
 ## Data Loading
 
+Sebelum melakukan eksplorasi data, terlebih dahulu kita load data, seperti berikut:
 
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -142,6 +167,8 @@ Tautannya dapat diakses di sini:
     </tr>
   </tbody>
 </table>
+</div>
+
 
 
 Dari hasil diatas diperoleh:
@@ -177,6 +204,9 @@ Berikut detail dari tiap-tiap variabel yang ada untuk memahami data yang kita pr
 - **N**: Gas alam (natural gas)  
 
 
+**Tipe Variabel**
+
+
 
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 7385 entries, 0 to 7384
@@ -199,12 +229,30 @@ Berikut detail dari tiap-tiap variabel yang ada untuk memahami data yang kita pr
     memory usage: 692.5+ KB
 
 
-dari hasil di atas tidak terdapat masalah pada tipe data dalam dataset. variabel dengan tipe data float sebanyak 4, variabel yang bertipe integer sebanyak 3 dan dengna tipe data object sebanyak 5 variabel.
+dari deskripsi variabel dan informasi di atas, dapat diperoleh bahwa tidak ada missing value dan tidak terdapat masalah pada tipe data dalam dataset. Selanjutnya untuk lebih detailnya periksa total missing value dan jika terdapat duplikasi data.
 
 ### EDA - Cleaning Data
 
-#### Menangani Missing Value & Duplicate Data
+#### Identifikasi *Missing Value* & Duplikasi Data
 
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -263,6 +311,10 @@ dari hasil di atas tidak terdapat masalah pada tipe data dalam dataset. variabel
     </tr>
   </tbody>
 </table>
+</div>
+
+
+
 
 
 
@@ -271,14 +323,25 @@ dari hasil di atas tidak terdapat masalah pada tipe data dalam dataset. variabel
 
 Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama sekali, akan tetapi memiliki duplicate value yang lumayan banyak yaitu sebanyak ```1103``` data yang terduplikasi, sehingga harus dihilangkan.
 
-    Jumlah duplikat setelah pembersihan: 0
+#### Identifikasi Outliers
 
 
 
 
-#### Menangani Outliers
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -295,33 +358,33 @@ Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama
   <tbody>
     <tr>
       <th>count</th>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
-      <td>6282.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
+      <td>7385.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>3.161812</td>
-      <td>5.618911</td>
-      <td>12.610220</td>
-      <td>9.070583</td>
-      <td>11.017876</td>
-      <td>27.411016</td>
-      <td>251.157752</td>
+      <td>3.160068</td>
+      <td>5.615030</td>
+      <td>12.556534</td>
+      <td>9.041706</td>
+      <td>10.975071</td>
+      <td>27.481652</td>
+      <td>250.584699</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>1.365201</td>
-      <td>1.846250</td>
-      <td>3.553066</td>
-      <td>2.278884</td>
-      <td>2.946876</td>
-      <td>7.245318</td>
-      <td>59.290426</td>
+      <td>1.354170</td>
+      <td>1.828307</td>
+      <td>3.500274</td>
+      <td>2.224456</td>
+      <td>2.892506</td>
+      <td>7.231879</td>
+      <td>58.512679</td>
     </tr>
     <tr>
       <th>min</th>
@@ -357,11 +420,11 @@ Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama
       <th>75%</th>
       <td>3.700000</td>
       <td>6.000000</td>
-      <td>14.700000</td>
-      <td>10.300000</td>
-      <td>12.700000</td>
+      <td>14.600000</td>
+      <td>10.200000</td>
+      <td>12.600000</td>
       <td>32.000000</td>
-      <td>289.000000</td>
+      <td>288.000000</td>
     </tr>
     <tr>
       <th>max</th>
@@ -375,13 +438,9 @@ Berdasarkan informasi diatas, dataset tersebut tidak memiliki missing value sama
     </tr>
   </tbody>
 </table>
+</div>
 
 
-
-
-dari ringkasan statistik yang diperoleh:  
-
----
 
 ##### **Penjelasan Statistik Deskriptif**
 
@@ -426,10 +485,9 @@ dari ringkasan statistik yang diperoleh:
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_38_0.png)
+![png](gambar_files/gambar_36_0.png)
     
-
-Outlier adalah nilai yang berada jauh di luar rentang normal data. Namun pada data kita, sebaran data masih jauh dibawah nilai rata-rata, artinya data yang yang kita miliki masih terbilang wajar, ambil contoh, variabel ```Engine Size``` bisa saja engine size memiliki value 8, tidak termasuk anomali.
+Nilai yang jauh di luar rentang normal, seperti ```Engine Size```, ```Cylinder```, konsumsi bahan bakar kombinasi yang mencapai **26.10 L/100 km** atau emisi CO2 sebesar **522 g/km**, dan variabel mungkin memerlukan perhatian lebih karena berpotensi menjadi *outlier*.
 
 
 ### EDA - Univariate Analysis
@@ -438,8 +496,9 @@ Outlier adalah nilai yang berada jauh di luar rentang normal data. Namun pada da
 
 
 
+
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_45_0.png)
+![png](gambar_files/gambar_39_0.png)
     
 
 
@@ -449,8 +508,9 @@ Variabel Model memiliki value sangat beragam sehingga visualisasi word cloud ada
 
 
 
+
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_48_0.png)
+![png](gambar_files/gambar_42_0.png)
     
 
 
@@ -465,7 +525,7 @@ Berikutnya, distribusi tiap variabel kategori.
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_51_0.png)
+![png](gambar_files/gambar_45_0.png)
     
 
 
@@ -485,31 +545,31 @@ Berikutnya, distribusi tiap variabel kategori.
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_56_0.png)
+![png](gambar_files/gambar_50_0.png)
     
 
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_56_1.png)
+![png](gambar_files/gambar_50_1.png)
     
 
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_56_2.png)
+![png](gambar_files/gambar_50_2.png)
     
 
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_56_3.png)
+![png](gambar_files/gambar_50_3.png)
     
 
 
 **Distribusi fitur kategori terhadap CO2 Emissions**  
 
-- Fitur ```Make``` dengan penyumbang emisi terbanyak adalah ```LAMBORGHINI, ASTON MARTIN, BENTLEY, dan MASERATI``` akan tetapi penggunaannya sangat-sangat rendah, bisa dilihat pada barplot horizontal di fase *Univariate Analysis*, dan rata-rata menyumbang emisi rentang 200-250 g/km
+- Fitur ```Make``` dengan penyumbang emisi terbanyak adalah ```BUGATTI, ROLLS-ROYCE, SRT, LAMBORGHINI, ASTON MARTIN, BENTLEY, dan MASERATI``` akan tetapi penggunaannya sangat-sangat rendah, bisa dilihat pada barplot horizontal di fase *Univariate Analysis*, dan rata-rata menyumbang emisi rentang 200-250 g/km
 - Penyumbang emisi terbanyak pada fitur ```Vehicle Class``` adalah ```VAN-CARGO, dan VAN-PASSENGER``` tapi merupakan class yang paling sedikit digunakan. sedangkan untuk class yang paling banyak digunakan yakni ```SUV-SMALL, MID-SIZE, dan COMPACT``` menyumbang emisi diantara rentang 200-250 g/km
 - Selanjutnya jenis ```Transmission``` yang paling banyak menyumbang emisi CO2 adalah jenis ```A10, A7, dan A5``` tapi merupakan jenis tranmisi yang tergolong rendah untuk penggunaannya. Untuk Transmisi yang paling sering digunakan yakni ```AS6, AS8, dan M6``` menyumbang emisi dengan rentang 200-250 g/km
 - Rata-rata semua ```Fuel Type``` menyumbang emisi yang tinggi, akan tetapi type ```N``` belum bisa disimpulkan karna data yang ada hanya satu dalam dataset.
@@ -520,7 +580,7 @@ Berikutnya, distribusi tiap variabel kategori.
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_59_0.png)
+![png](gambar_files/gambar_53_0.png)
     
 
 
@@ -529,22 +589,218 @@ Nilai relasi rentang -1 hingga +1 bisa dilihat dalam hetmap berikut.
 
 
 
+
+
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_61_0.png)
+![png](gambar_files/gambar_55_0.png)
     
 
 
 # Data Preparation
+___
 
-## Encoding Fitur Kategori
+## Menangani Duplikasi Data dan Outliers
 
-Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot Encoding*, fitur yang kita pilih adalah ```'Make', 'Vehicle Class', 'Transmission', 'Fuel Type'```
+**Membersihkan Duplikasi Data**
 
 
+    Jumlah duplikat setelah pembersihan: 0
+
+
+##### **Menangani Outlier Menggunakan Metode IQR**
+
+Outlier adalah nilai yang berada jauh di luar rentang normal data. Salah satu cara yang efektif untuk mengidentifikasi dan menangani outlier adalah menggunakan **Metode IQR (Interquartile Range)**. Berikut adalah langkah-langkah dan cara melakukannya:
+
+1. **Definisi IQR**
+Interquartile Range (IQR) adalah rentang antara kuartil ketiga (Q3) dan kuartil pertama (Q1), yang merepresentasikan 50% data tengah.
+
+2. **Identifikasi Outlier**
+Outlier didefinisikan sebagai nilai yang berada di bawah atau di atas batas berikut:
+- **Batas Bawah (Lower Bound)**
+- **Batas Atas (Upper Bound)**
+
+Nilai yang:
+- Kurang dari **Lower Bound** dianggap sebagai *outlier bawah*.
+- Lebih dari **Upper Bound** dianggap sebagai *outlier atas*.
+
+3. **Langkah-langkah Penanganan**  
+$$
+\text{IQR} = Q3 - Q1
+$$
+
+Batas bawah (Lower Bound):
+$$
+\text{Lower Bound} = Q1 - 1.5 \times \text{IQR}
+$$
+
+Batas atas (Upper Bound):
+$$
+\text{Upper Bound} = Q3 + 1.5 \times \text{IQR}
+$$
+
+
+
+
+
+
+
+
+    (5816, 12)
+
+
+
+Setelah pembersihan, data saat ini memiliki shape **```(5816, 12)```**
+
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Engine Size(L)</th>
+      <th>Cylinders</th>
+      <th>Fuel Consumption City (L/100 km)</th>
+      <th>Fuel Consumption Hwy (L/100 km)</th>
+      <th>Fuel Consumption Comb (L/100 km)</th>
+      <th>Fuel Consumption Comb (mpg)</th>
+      <th>CO2 Emissions(g/km)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+      <td>5816.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.014254</td>
+      <td>5.391678</td>
+      <td>12.233253</td>
+      <td>8.831327</td>
+      <td>10.702975</td>
+      <td>27.664718</td>
+      <td>246.004814</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.215559</td>
+      <td>1.517327</td>
+      <td>2.858852</td>
+      <td>1.864839</td>
+      <td>2.379066</td>
+      <td>6.043525</td>
+      <td>50.208692</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.900000</td>
+      <td>3.000000</td>
+      <td>5.600000</td>
+      <td>4.500000</td>
+      <td>6.000000</td>
+      <td>16.000000</td>
+      <td>128.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.000000</td>
+      <td>4.000000</td>
+      <td>10.000000</td>
+      <td>7.400000</td>
+      <td>8.900000</td>
+      <td>23.000000</td>
+      <td>207.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.000000</td>
+      <td>6.000000</td>
+      <td>11.900000</td>
+      <td>8.600000</td>
+      <td>10.400000</td>
+      <td>27.000000</td>
+      <td>242.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.600000</td>
+      <td>6.000000</td>
+      <td>14.100000</td>
+      <td>9.900000</td>
+      <td>12.300000</td>
+      <td>32.000000</td>
+      <td>281.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>6.200000</td>
+      <td>8.000000</td>
+      <td>21.300000</td>
+      <td>14.500000</td>
+      <td>18.100000</td>
+      <td>47.000000</td>
+      <td>407.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Encoding Fitur Kategori
+
+Dikarenakan variabel ```Model``` memiliki value yang sangat beragam, maka kita menggunakan teknik Frequency Encoding. Frequency Encoding adalah salah satu metode encoding untuk mengubah variabel kategori menjadi variabel numerik berdasarkan jumlah kemunculan (frekuensi) setiap kategori di dalam dataset. Metode ini sangat berguna untuk menangani variabel kategori dengan banyak nilai unik (high cardinality). 
+
+
+Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot Encoding*, fitur yang kita pilih adalah ```'Make', 'Vehicle Class', 'Transmission', 'Fuel Type'```
+
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
       <th>Engine Size(L)</th>
       <th>Cylinders</th>
       <th>Fuel Consumption City (L/100 km)</th>
@@ -644,6 +900,7 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
   <tbody>
     <tr>
       <th>0</th>
+      <td>7</td>
       <td>2.0</td>
       <td>4</td>
       <td>9.9</td>
@@ -741,6 +998,7 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
     </tr>
     <tr>
       <th>1</th>
+      <td>7</td>
       <td>2.4</td>
       <td>4</td>
       <td>11.2</td>
@@ -838,6 +1096,7 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
     </tr>
     <tr>
       <th>3</th>
+      <td>1</td>
       <td>3.5</td>
       <td>6</td>
       <td>12.7</td>
@@ -935,6 +1194,7 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
     </tr>
     <tr>
       <th>4</th>
+      <td>4</td>
       <td>3.5</td>
       <td>6</td>
       <td>12.1</td>
@@ -1032,6 +1292,7 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
     </tr>
     <tr>
       <th>5</th>
+      <td>2</td>
       <td>3.5</td>
       <td>6</td>
       <td>11.9</td>
@@ -1129,12 +1390,15 @@ Selanjutnya melakukan proses encoding pada fitur kategori yakni teknik *One-Hot 
     </tr>
   </tbody>
 </table>
+</div>
 
 
 
 ## Reduksi Dimensi dengan PCA
 
 Selanjutnya yaitu melakukan reduksi dimensi pada fitur ```"Fuel Consumption City (L/100 km)", "Fuel Consumption Hwy (L/100 km)", "Fuel Consumption Comb (L/100 km)", "Fuel Consumption Comb (mpg)"``` karna fitur-fitur ini memiliki informasi yang sama yaitu konsumsi bahan bakar.
+
+
 
 
 
@@ -1148,10 +1412,26 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
 
 
 
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Model</th>
       <th>Engine Size(L)</th>
       <th>Cylinders</th>
       <th>CO2 Emissions(g/km)</th>
@@ -1248,6 +1528,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
   <tbody>
     <tr>
       <th>0</th>
+      <td>7</td>
       <td>2.0</td>
       <td>4</td>
       <td>196</td>
@@ -1342,6 +1623,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
     </tr>
     <tr>
       <th>1</th>
+      <td>7</td>
       <td>2.4</td>
       <td>4</td>
       <td>221</td>
@@ -1436,6 +1718,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
     </tr>
     <tr>
       <th>3</th>
+      <td>1</td>
       <td>3.5</td>
       <td>6</td>
       <td>255</td>
@@ -1530,6 +1813,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
     </tr>
     <tr>
       <th>4</th>
+      <td>4</td>
       <td>3.5</td>
       <td>6</td>
       <td>244</td>
@@ -1624,6 +1908,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
     </tr>
     <tr>
       <th>5</th>
+      <td>2</td>
       <td>3.5</td>
       <td>6</td>
       <td>230</td>
@@ -1718,7 +2003,7 @@ Berdasarkan hasil ini, kita akan mereduksi fitur (dimensi) dan hanya mempertahan
     </tr>
   </tbody>
 </table>
-
+</div>
 
 
 
@@ -1734,6 +2019,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 ```
 
 
+```python
+print(f'Total # of sample in whole dataset: {len(X)}')
+print(f'Total # of sample in train dataset: {len(X_train)}')
+print(f'Total # of sample in test dataset: {len(X_test)}')
+```
+
     Total # of sample in whole dataset: 5816
     Total # of sample in train dataset: 4652
     Total # of sample in test dataset: 1164
@@ -1746,6 +2037,22 @@ Lakukan standarisasi pada kolom ```"Engine Size(L)", "Cylinders", dan "Fuel Cons
 
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1788,9 +2095,31 @@ Lakukan standarisasi pada kolom ```"Engine Size(L)", "Cylinders", dan "Fuel Cons
     </tr>
   </tbody>
 </table>
+</div>
+
+
 
 proses standarisasi mengubah nilai rata-rata (mean) menjadi 0 dan nilai standar deviasi menjadi 1. Berikut untuk mengecek nilai mean dan standar deviasi pada setelah proses standarisasi.
 
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1851,9 +2180,12 @@ proses standarisasi mengubah nilai rata-rata (mean) menjadi 0 dan nilai standar 
     </tr>
   </tbody>
 </table>
+</div>
+
 
 
 # Model Development
+___
 
 Model yang digunakan untuk memprediksi tingkat emisi CO2 adalah ```KNN (K-Nearest Neighbors), Random Forest, dan Boosting```. **KNN** merupakan algoritma yang mengklasifikasikan atau memprediksi nilai berdasarkan kedekatannya dengan data lain dalam ruang fitur. **Random Forest** adalah algoritma ensemble yang membangun banyak pohon keputusan dan menggabungkan hasil prediksi mereka untuk meningkatkan akurasi dan mengurangi overfitting. Sedangkan **Boosting**, khususnya AdaBoost, adalah teknik ensemble yang menggabungkan model-model lemah secara berturut-turut, di mana model berikutnya berfokus pada kesalahan yang dibuat oleh model sebelumnya, untuk meningkatkan performa prediksi secara keseluruhan. Masing-masing model ini memiliki pendekatan yang berbeda dalam memproses data dan mengoptimalkan prediksi, yang memungkinkan untuk membandingkan kekuatan prediktif mereka dalam memprediksi emisi CO2.
 
@@ -1920,10 +2252,11 @@ model.loc['train_mse', 'Boosting'] = mean_squared_error(y_pred=boosting.predict(
 ```
 
 # Model Evaluation
+___
 
 Evaluasi model adalah proses untuk mengukur performa model prediktif dengan menggunakan data yang tidak dilibatkan dalam proses pelatihan. Salah satu metrik evaluasi yang umum digunakan untuk masalah regresi adalah **Mean Squared Error (MSE)**.
 
----
+
 
 ### **Mean Squared Error (MSE)**
 MSE dihitung sebagai rata-rata kuadrat selisih antara nilai sebenarnya dan nilai prediksi. Rumusnya adalah:
@@ -1941,8 +2274,6 @@ n & : \text{Jumlah data (observasi)}
 $$
 
 Nilai MSE yang lebih kecil menunjukkan model memiliki kemampuan prediksi yang lebih baik, karena kesalahan prediksi lebih kecil.
-
----  
 
 ## Persiapan Data Test
 
@@ -1985,6 +2316,23 @@ for name, model in model_dict.items():
 mse
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1996,13 +2344,13 @@ mse
   <tbody>
     <tr>
       <th>KNN</th>
-      <td>0.094991</td>
-      <td>0.122521</td>
+      <td>0.133788</td>
+      <td>0.158733</td>
     </tr>
     <tr>
       <th>RF</th>
-      <td>0.002306</td>
-      <td>0.007852</td>
+      <td>0.002169</td>
+      <td>0.007982</td>
     </tr>
     <tr>
       <th>Boosting</th>
@@ -2011,35 +2359,39 @@ mse
     </tr>
   </tbody>
 </table>
+</div>
 
 
 
 
-```python
-fig, ax = plt.subplots()
-mse.sort_values(by='test', ascending=False).plot(kind='barh', ax=ax, zorder=3)
-ax.grid(zorder=0)
-```
 
 
     
-![png](Predicitve_Analytic_Vehicle_Emissions_files/Predicitve_Analytic_Vehicle_Emissions_99_0.png)
+![png](gambar_files/gambar_104_0.png)
     
 
 
-
-```python
-prediksi = X_test.iloc[:1].copy()
-pred_dict = {'y_true': y_test[:1]}
-
-for name, model in model_dict.items():
-    pred_dict['prediksi_'+name] = model.predict(prediksi).round(0)
-
-pd.DataFrame(pred_dict)
-```
+Hasil MSE diperoleh bahwa algoritma Random Forest memiliki MSE yang sangat rendah, meskipun pada data test lebih tinggi namun masih bisa ditolerir. Pada algoritma Boosting diperoleh MSE pada data test lebih rendah dari data train, jika dibanding dengan Random Forest MSE Boosting lebih tinggi namun masih kategori nilai yang rendah, bahkan bisa dibilang Boosting lebih stabil karna menunjukkan MSE pada test lebih rendah. untuk algoritma KNN, MSE pada test masih sangat tinggi dibandingkan pada data train
 
 
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2054,28 +2406,32 @@ pd.DataFrame(pred_dict)
     <tr>
       <th>5063</th>
       <td>280</td>
-      <td>285.0</td>
-      <td>281.0</td>
-      <td>280.0</td>
+      <td>282.8</td>
+      <td>279.855</td>
+      <td>279.654</td>
+    </tr>
+    <tr>
+      <th>5637</th>
+      <td>175</td>
+      <td>174.8</td>
+      <td>176.155</td>
+      <td>170.540</td>
+    </tr>
+    <tr>
+      <th>6979</th>
+      <td>236</td>
+      <td>240.7</td>
+      <td>233.777</td>
+      <td>239.856</td>
     </tr>
   </tbody>
 </table>
+</div>
 
 
-
-
-## Diskusi dan Interpretasi
-1. MSE vs Hasil Prediksi:
-Meskipun Random Forest memiliki MSE yang paling rendah, prediksinya pada contoh spesifik ini tidak lebih akurat daripada Boosting. Hal ini menunjukkan bahwa MSE mencerminkan performa rata-rata model, bukan performa pada sampel individual.
-
-2. Boosting:
-Meskipun memiliki MSE yang lebih tinggi secara keseluruhan, Boosting memberikan prediksi paling akurat untuk contoh ini. Ini bisa terjadi karena model Boosting mungkin lebih baik dalam menangkap pola tertentu tetapi kurang optimal pada data secara keseluruhan.
-
-3. KNN:
-Prediksi KNN pada sampel ini lebih jauh dari nilai sebenarnya, mendukung hasil MSE yang menunjukkan performanya lebih buruk dibandingkan RF.
 
 # Kesimpulan
-Untuk performa keseluruhan, Random Forest tetap menjadi model terbaik berdasarkan MSE yang rendah.
+Untuk performa keseluruhan, Random Forest tetap menjadi model terbaik berdasarkan MSE yang rendah, dan hasil prediksi yang paling akurat jika dibandingkan dengan kedua model yang lain, kemudian model Boosting bisa menjadi pilihan selanjutnya karna lebih stabil, jika dibandingkan dengan KNN yang nilai MSE pada data train cukup tinggi.
 
 **Distribusi Variabel Kategori:**
 - **Make**: Ford, BMW, dan Chevrolet paling sering digunakan, sementara Lamborghini paling rendah.
@@ -2093,7 +2449,7 @@ Untuk performa keseluruhan, Random Forest tetap menjadi model terbaik berdasarka
 - **CO2 Emissions**: Emisi terbanyak berada di kisaran 200-250 g/km.
 
 **Distribusi Kategori terhadap CO2 Emissions:**
-- **Make**: Merek seperti Lamborghini, Aston Martin, Bentley, dan Maserati memiliki emisi tertinggi, tetapi penggunaannya rendah.
+- **Make**: Merek seperti ```BUGATTI, ROLLS-ROYCE, SRT, LAMBORGHINI, ASTON MARTIN, BENTLEY, dan MASERATI``` memiliki emisi tertinggi, tetapi penggunaannya rendah.
 - **Vehicle Class**: Van-Cargo dan Van-Passenger menyumbang emisi tertinggi meskipun jarang digunakan. SUV-Small, Mid-Size, dan Compact menghasilkan emisi antara 200-250 g/km.
 - **Transmission**: A10, A7, dan A5 menyumbang emisi tertinggi meskipun jarang digunakan. AS6, AS8, dan M6, yang lebih sering digunakan, menyumbang emisi dalam kisaran 200-250 g/km.
 - **Fuel Type**: Semua jenis bahan bakar menyumbang emisi tinggi, meskipun tipe N (Natural Gas) hanya memiliki satu data, sehingga tidak bisa disimpulkan.
@@ -2101,7 +2457,6 @@ Untuk performa keseluruhan, Random Forest tetap menjadi model terbaik berdasarka
 **Relasi antara Fitur Numerik dan CO2 Emissions:**
 - Terdapat relasi positif antara sebagian besar fitur numerik (seperti Engine Size, Cylinders, dan Fuel Consumption) dengan CO2 emissions, yang berarti semakin besar ukuran mesin, jumlah silinder, atau konsumsi bahan bakar, semakin tinggi emisi yang dihasilkan.
 - **Fuel Consumption (mpg)** menunjukkan relasi negatif, karena semakin tinggi efisiensi bahan bakar, semakin rendah emisi CO2 yang dihasilkan.
-
 
 
 # Referensi
